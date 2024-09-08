@@ -11,11 +11,6 @@ This project is a boilerplate for creating RESTful APIs using Express.js and Typ
 - ESLint for code linting
 - Nodemon for development hot-reloading
 
-## Prerequisites
-
-- Node.js (v14 or later recommended)
-- npm (v6 or later)
-
 ## Installation
 
 1. Clone the repository:
@@ -28,12 +23,6 @@ This project is a boilerplate for creating RESTful APIs using Express.js and Typ
    ```bash
    npm install
    ```
-
-3. Create a `.env` file in the root directory and add your environment variables:
-   ```bash
-   PORT=3000
-   ```
-
 ## Usage
 
 ### Development
@@ -41,20 +30,27 @@ This project is a boilerplate for creating RESTful APIs using Express.js and Typ
 To run the server in development mode with hot-reloading:
 
 
+   ```bash
+   npm run dev
+   ```
 
 ### Production
 
 To build and run the server in production mode:
 
-npm run build
-npm start
+   ```bash
+   npm run build
+   npm start
+   ```
 
 
 ### Linting
 
 To lint your code:
 
-npm run lint
+   ```bash
+   npm run lint
+   ```
 
 
 ## Project Structure
@@ -72,7 +68,8 @@ This project includes two custom decorators:
 2. `@checkSession`: Checks for a session token in the request headers.
 
 Example usage in a controller:
-ypescript
+
+```typescript
 import { timeRequest, checkSession } from '../decorators/requestDecorators';
 export class SomeController {
 @timeRequest
@@ -80,5 +77,7 @@ export class SomeController {
 public someMethod(req: Request, res: Response): void {
 // Method implementation
 }
-}
+}   
+```
+    
 
