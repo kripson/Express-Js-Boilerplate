@@ -99,13 +99,17 @@ This file is the main entry file. It imports all of the middlewares and controll
 1. Controllers:
    HomeController: Handles requests to the home route.
    UserController: Manages user-related operations (CRUD) and other end points for specific actions can be added.
-   Middleware:
+
+2. Middlewares:
    sessionChecker: A middleware function that checks for a session token in the request headers.
-   Validation:
+
+3. Helpers:
    ValidationHelper: A helper class that uses zod to validate incoming data against defined schemas.
-   Database:
+   
+4. Database:
    db.ts: Sets up the database connection using drizzle-orm and Postgres.
-   Code Quality
+
+5. Code Quality
    The project uses ESLint for linting and follows best practices for TypeScript development.
    The IoC pattern is implemented to manage dependencies, making the code more modular and testable.
 
