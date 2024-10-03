@@ -1,19 +1,21 @@
 # Express.js RESTful API Boilerplate
 
-This project is a boilerplate for creating RESTful APIs using Express.js and TypeScript. It includes a basic setup with decorators for request timing and session checking.
+This project is a boilerplate for creating RESTful APIs using Express.js and TypeScript. It includes several features and follows a structured approach to organizing code.
 
-## Features
+## Key Features
 
-- Express.js server setup
-- TypeScript support
-- Environment variable configuration with dotenv
-- Custom decorators for request timing and session checking
-- ESLint for code linting
-- Nodemon for development hot-reloading
+- Express.js Server Setup: The project sets up an Express server to handle HTTP requests.
+- TypeScript Support: The code is written in TypeScript, providing type safety and better tooling.
+- Environment Variable Configuration: Uses dotenv for managing environment variables.
+- Postgres Database: Integrates with a Postgres database using drizzle as the ORM.
+- Validation with Zod: Utilizes zod for data validation.
+- ESLint for Code Linting: Ensures code quality and consistency.
+- Nodemon for Development: Automatically restarts the server during development.
 
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/your-username/expressjs-restful-boilerplate.git
    cd expressjs-restful-boilerplate
@@ -23,61 +25,88 @@ This project is a boilerplate for creating RESTful APIs using Express.js and Typ
    ```bash
    npm install
    ```
+
 ## Usage
 
 ### Development
 
 To run the server in development mode with hot-reloading:
 
-
-   ```bash
-   npm run dev
-   ```
+```bash
+npm run dev
+```
 
 ### Production
 
 To build and run the server in production mode:
 
-   ```bash
-   npm run build
-   npm start
-   ```
-
+```bash
+npm run build
+npm start
+```
 
 ### Linting
 
 To lint your code:
 
-   ```bash
-   npm run lint
-   ```
-
+```bash
+npm run lint
+```
 
 ## Project Structure
 
+### Project entry
+
 - `index.ts`: Main application file
-- `controllers/`: Contains controller classes
-- `decorators/`: Custom TypeScript decorators
-- `dist/`: Compiled JavaScript files (generated after build)
 
-## Decorators
+#### index.ts
 
-This project includes two custom decorators:
+Main application file that initializes the Express app and sets up middleware and routes.
 
-1. `@timeRequest`: Logs the execution time of a controller method.
-2. `@checkSession`: Checks for a session token in the request headers.
+#### controllers/
 
-Example usage in a controller:
+Contains controller classes that handle the logic for different routes.
 
-```typescript
-import { timeRequest, checkSession } from '../decorators/requestDecorators';
-export class SomeController {
-@timeRequest
-@checkSession
-public someMethod(req: Request, res: Response): void {
-// Method implementation
-}
-}   
-```
-    
+#### helpers/
 
+Contains helper classes for various utilities, such as validation.
+
+#### ioc/
+
+Implements a simplified version of Inversion of Control (IoC) pattern for managing dependencies.
+
+#### middlewares/
+
+Contains middleware functions for request processing.
+
+#### dist/
+
+Compiled JavaScript files generated after building the TypeScript code.
+
+### Main Components
+
+#### index.ts
+
+- Initializes the Express app.
+- Loads environment variables.
+- Sets up middleware for JSON parsing and session checking.
+- Defines routes using controller instances.
+
+This file is the main entry file. It imports all of the middlewares and controllers and maps top level routes to specific controllers.
+
+## Project architecture
+
+1. Controllers:
+   HomeController: Handles requests to the home route.
+   UserController: Manages user-related operations (CRUD) and other end points for specific actions can be added.
+   Middleware:
+   sessionChecker: A middleware function that checks for a session token in the request headers.
+   Validation:
+   ValidationHelper: A helper class that uses zod to validate incoming data against defined schemas.
+   Database:
+   db.ts: Sets up the database connection using drizzle-orm and Postgres.
+   Code Quality
+   The project uses ESLint for linting and follows best practices for TypeScript development.
+   The IoC pattern is implemented to manage dependencies, making the code more modular and testable.
+
+The architecture is pretty straight forward. The index.ts file instantiates the express.js app and hooks all the middlewares to it. The incoming requests are routed to specific controllers which take care of the crud and other specific operations. They perform validation and other required checks/modifications using the helper classes. There is a special ioc class that provides all of the helper classes.
